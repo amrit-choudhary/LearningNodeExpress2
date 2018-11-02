@@ -40,4 +40,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://127.0.0.1:27017/local_library';
+mongoose.connect(mongoDB, {
+    useNewUrlParser: true
+  });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 module.exports = app;
